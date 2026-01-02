@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { RsvpFormState } from '../types';
 import { generateWeddingWish } from '../services/geminiService';
 
-const InputLabel = ({ children }: { children: React.ReactNode }) => (
+// Updated to use React.PropsWithChildren to resolve 'children' property missing errors
+const InputLabel = ({ children }: React.PropsWithChildren<{}>) => (
   <label className="block text-[10px] uppercase tracking-widest-xl text-wedding-charcoal/60 mb-3 text-center md:text-left">
     {children}
   </label>
