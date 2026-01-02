@@ -85,8 +85,8 @@ const App: React.FC = () => {
           <div className="w-full md:w-1/2 flex justify-center">
              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full border-4 border-double border-gold overflow-hidden shadow-2xl">
                 <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Penang_City_Hall_-_George_Town%2C_Penang.jpg/1024px-Penang_City_Hall_-_George_Town%2C_Penang.jpg" 
-                  alt="Padang Kota Lama (Penang City Hall)" 
+                  src="https://www.caridestinasi.com/wp-content/uploads/2017/03/1-tempat-menarik-padang-kota-lama.jpg" 
+                  alt="Padang Kota Lama" 
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
                 />
              </div>
