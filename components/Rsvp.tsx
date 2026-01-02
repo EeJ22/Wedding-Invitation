@@ -34,6 +34,22 @@ const Rsvp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Save to localStorage
+    const submission = {
+        ...form,
+        submittedAt: new Date().toISOString()
+    };
+    
+    try {
+        const existingData = localStorage.getItem('wedding_responses');
+        const responses = existingData ? JSON.parse(existingData) : [];
+        responses.push(submission);
+        localStorage.setItem('wedding_responses', JSON.stringify(responses));
+    } catch (error) {
+        console.error("Failed to save response", error);
+    }
+
     setTimeout(() => {
       setIsSubmitted(true);
     }, 1000);
@@ -45,6 +61,12 @@ const Rsvp: React.FC = () => {
         <div className="text-4xl mb-4 text-rouge">囍</div>
         <h3 className="text-3xl font-serif mb-4 text-charcoal">Thank You</h3>
         <p className="font-sans text-sm tracking-widest text-gray-500">Your response has been recorded.</p>
+        <button 
+            onClick={() => setIsSubmitted(false)}
+            className="mt-8 text-[10px] uppercase tracking-widest text-gold hover:text-rouge underline"
+        >
+            Submit another response
+        </button>
       </div>
     );
   }
