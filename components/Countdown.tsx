@@ -29,24 +29,26 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     return () => clearInterval(interval);
   }, [targetDate]);
 
+  const TimeUnit = ({ value, label }: { value: number, label: string }) => (
+    <div className="flex flex-col items-center mx-4 md:mx-8">
+      <span className="text-3xl md:text-5xl font-serif font-light text-wedding-charcoal mb-2">
+        {value.toString().padStart(2, '0')}
+      </span>
+      <span className="text-[10px] md:text-xs uppercase tracking-widest-xl text-wedding-gold border-t border-wedding-gold/30 pt-2 w-full text-center">
+        {label}
+      </span>
+    </div>
+  );
+
   return (
-    <div className="flex justify-center space-x-6 md:space-x-12 py-10 text-wedding-charcoal">
-      <div className="text-center">
-        <span className="block text-4xl md:text-5xl font-serif font-light">{timeLeft.days}</span>
-        <span className="text-xs md:text-sm uppercase tracking-widest text-gray-500">Days</span>
-      </div>
-      <div className="text-center">
-        <span className="block text-4xl md:text-5xl font-serif font-light">{timeLeft.hours}</span>
-        <span className="text-xs md:text-sm uppercase tracking-widest text-gray-500">Hours</span>
-      </div>
-      <div className="text-center">
-        <span className="block text-4xl md:text-5xl font-serif font-light">{timeLeft.minutes}</span>
-        <span className="text-xs md:text-sm uppercase tracking-widest text-gray-500">Mins</span>
-      </div>
-      <div className="text-center">
-        <span className="block text-4xl md:text-5xl font-serif font-light">{timeLeft.seconds}</span>
-        <span className="text-xs md:text-sm uppercase tracking-widest text-gray-500">Secs</span>
-      </div>
+    <div className="flex justify-center items-center py-12">
+      <TimeUnit value={timeLeft.days} label="Days" />
+      <div className="h-8 w-[1px] bg-gray-200 hidden md:block"></div>
+      <TimeUnit value={timeLeft.hours} label="Hours" />
+      <div className="h-8 w-[1px] bg-gray-200 hidden md:block"></div>
+      <TimeUnit value={timeLeft.minutes} label="Mins" />
+      <div className="h-8 w-[1px] bg-gray-200 hidden md:block"></div>
+      <TimeUnit value={timeLeft.seconds} label="Secs" />
     </div>
   );
 };

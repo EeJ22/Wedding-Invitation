@@ -6,7 +6,7 @@ export const generateWeddingWish = async (userInput: string, senderName: string)
   try {
     const prompt = `
       You are a poetic and elegant wedding assistant. 
-      The guest, ${senderName || "a friend"}, wants to write a wish for the couple, Lee Jia Xuan (Bride) and Tan Yi Qi (Groom).
+      The guest, ${senderName || "a friend"}, wants to write a wish for the couple, Lee Jia Xuan (Bride) and Teoh Yi Qi (Groom).
       
       The user's rough input is: "${userInput}".
       

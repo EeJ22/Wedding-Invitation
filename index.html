@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wedding of Lee Jia Xuan & Tan Yi Qi</title>
+    <title>Wedding of Lee Jia Xuan & Teoh Yi Qi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -17,10 +17,13 @@
               sans: ['"Montserrat"', 'sans-serif'],
             },
             colors: {
-              'wedding-gold': '#D4AF37',
-              'wedding-cream': '#F9F7F2',
-              'wedding-charcoal': '#333333',
-              'wedding-sage': '#8A9A5B',
+              'wedding-gold': '#C5A059', /* Muted, metallic gold */
+              'wedding-bg': '#FDFBF7', /* Warm alabaster */
+              'wedding-charcoal': '#1A1A1A', /* Deep elegant black */
+              'wedding-stone': '#E5E5E0',
+            },
+            letterSpacing: {
+              'widest-xl': '0.25em',
             }
           }
         }
@@ -28,15 +31,31 @@
     </script>
     <style>
       body {
-        background-color: #F9F7F2;
-        color: #333333;
+        background-color: #FDFBF7;
+        color: #1A1A1A;
       }
-      .fade-in {
-        animation: fadeIn 2s ease-in-out;
+      .fade-in-up {
+        animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
       }
-      @keyframes fadeIn {
-        0% { opacity: 0; transform: translateY(20px); }
+      @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(40px); }
         100% { opacity: 1; transform: translateY(0); }
+      }
+      .delay-100 { animation-delay: 0.1s; }
+      .delay-200 { animation-delay: 0.2s; }
+      .delay-300 { animation-delay: 0.3s; }
+      
+      /* Elegant refined scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #FDFBF7;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #C5A059;
+        border-radius: 3px;
       }
     </style>
   <script type="importmap">
@@ -52,6 +71,5 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
