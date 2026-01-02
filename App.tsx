@@ -5,6 +5,39 @@ import Rsvp from './components/Rsvp';
 const App: React.FC = () => {
   const weddingDate = new Date('2026-02-14T18:00:00');
 
+  const googleCalendarUrl = (() => {
+    const title = encodeURIComponent("Wedding of Lee Jia Xuan & Teoh Yi Qi");
+    const details = encodeURIComponent("We look forward to celebrating with you!");
+    const location = encodeURIComponent("Padang Kota Lama, Esplanade Road, George Town, Penang");
+    const start = "20260214T180000";
+    const end = "20260214T230000";
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${start}/${end}`;
+  })();
+
+  const handleDownloadIcs = () => {
+    const event = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "BEGIN:VEVENT",
+      "DTSTART:20260214T180000",
+      "DTEND:20260214T230000",
+      "SUMMARY:Wedding of Lee Jia Xuan & Teoh Yi Qi",
+      "DESCRIPTION:We look forward to celebrating with you!",
+      "LOCATION:Padang Kota Lama, Penang",
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\n");
+
+    const blob = new Blob([event], { type: "text/calendar;charset=utf-8" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "wedding-invitation.ics");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen bg-porcelain bg-paper-texture text-charcoal overflow-x-hidden">
       
@@ -100,7 +133,24 @@ const App: React.FC = () => {
               <div>
                 <h3 className="font-sans text-xs font-bold text-gold uppercase tracking-widest mb-2">When</h3>
                 <p className="font-serif text-xl text-charcoal">February 14, 2026</p>
-                <p className="font-sans text-sm text-gray-500">6:00 PM Reception</p>
+                <p className="font-sans text-sm text-gray-500 mb-4">6:00 PM Reception</p>
+                
+                <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                   <a 
+                      href={googleCalendarUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-4 py-2 border border-charcoal/30 text-[10px] uppercase tracking-widest hover:bg-gold hover:text-white hover:border-gold transition-all"
+                    >
+                      Google Calendar
+                    </a>
+                    <button 
+                      onClick={handleDownloadIcs}
+                      className="inline-block px-4 py-2 border border-charcoal/30 text-[10px] uppercase tracking-widest hover:bg-gold hover:text-white hover:border-gold transition-all"
+                    >
+                      Outlook / Apple
+                    </button>
+                </div>
               </div>
 
               <div>
