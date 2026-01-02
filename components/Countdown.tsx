@@ -30,24 +30,23 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   }, [targetDate]);
 
   const TimeUnit = ({ value, label }: { value: number, label: string }) => (
-    <div className="flex flex-col items-center mx-4 md:mx-8">
-      <span className="text-3xl md:text-5xl font-serif font-light text-wedding-charcoal mb-2">
-        {value.toString().padStart(2, '0')}
-      </span>
-      <span className="text-[10px] md:text-xs uppercase tracking-widest-xl text-wedding-gold border-t border-wedding-gold/30 pt-2 w-full text-center">
+    <div className="flex flex-col items-center mx-2 md:mx-6">
+      <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border border-gold/50 flex items-center justify-center bg-rouge shadow-inner">
+        <span className="text-2xl md:text-4xl font-serif text-gold">
+          {value}
+        </span>
+      </div>
+      <span className="mt-3 text-[10px] md:text-xs uppercase tracking-widest text-gold/80">
         {label}
       </span>
     </div>
   );
 
   return (
-    <div className="flex justify-center items-center py-12">
+    <div className="flex justify-center items-center">
       <TimeUnit value={timeLeft.days} label="Days" />
-      <div className="h-8 w-[1px] bg-gray-200 hidden md:block"></div>
       <TimeUnit value={timeLeft.hours} label="Hours" />
-      <div className="h-8 w-[1px] bg-gray-200 hidden md:block"></div>
       <TimeUnit value={timeLeft.minutes} label="Mins" />
-      <div className="h-8 w-[1px] bg-gray-200 hidden md:block"></div>
       <TimeUnit value={timeLeft.seconds} label="Secs" />
     </div>
   );

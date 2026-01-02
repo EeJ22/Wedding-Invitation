@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { RsvpFormState } from '../types';
 import { generateWeddingWish } from '../services/geminiService';
 
-// Updated to use React.PropsWithChildren to resolve 'children' property missing errors
 const InputLabel = ({ children }: React.PropsWithChildren<{}>) => (
-  <label className="block text-[10px] uppercase tracking-widest-xl text-wedding-charcoal/60 mb-3 text-center md:text-left">
+  <label className="block text-xs font-bold uppercase tracking-widest text-gold mb-2">
     {children}
   </label>
 );
@@ -42,33 +41,28 @@ const Rsvp: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className="w-full text-center py-20 fade-in-up">
-        <div className="inline-block p-10 border border-wedding-gold/30 bg-white">
-          <h3 className="text-4xl font-serif mb-6 text-wedding-charcoal italic">Merci</h3>
-          <p className="font-sans text-sm tracking-widest uppercase text-gray-500 mb-2">We have received your response</p>
-          <div className="w-12 h-[1px] bg-wedding-gold mx-auto mt-6"></div>
-        </div>
+      <div className="w-full text-center py-20 bg-porcelain border border-gold p-8 shadow-xl">
+        <div className="text-4xl mb-4 text-rouge">囍</div>
+        <h3 className="text-3xl font-serif mb-4 text-charcoal">Thank You</h3>
+        <p className="font-sans text-sm tracking-widest text-gray-500">Your response has been recorded.</p>
       </div>
     );
   }
 
-  const inputClasses = "w-full border-b border-gray-200 focus:border-wedding-gold outline-none py-3 bg-transparent transition-all font-serif text-xl text-wedding-charcoal text-center md:text-left placeholder-gray-200";
+  const inputClasses = "w-full border-b-2 border-gray-200 focus:border-rouge outline-none py-3 bg-transparent transition-colors font-serif text-lg text-charcoal placeholder-gray-300";
 
   return (
-    <div className="bg-white p-8 md:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-gray-100 max-w-3xl mx-auto relative">
-      <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-wedding-gold/50"></div>
-      <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-wedding-gold/50"></div>
-      <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-wedding-gold/50"></div>
-      <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-wedding-gold/50"></div>
+    <div className="bg-white p-8 md:p-12 shadow-2xl border-t-4 border-rouge relative">
+      {/* Decorative corners */}
+      <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gold"></div>
+      <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gold"></div>
+      <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-gold"></div>
+      <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-gold"></div>
 
-      <h3 className="text-3xl md:text-4xl font-serif text-center mb-12 text-wedding-charcoal tracking-wide">
-        Répondez s'il vous plaît
-      </h3>
-      
-      <form onSubmit={handleSubmit} className="space-y-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="group">
-            <InputLabel>Full Name</InputLabel>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <InputLabel>Guest Name</InputLabel>
             <input
               required
               type="text"
@@ -76,11 +70,11 @@ const Rsvp: React.FC = () => {
               value={form.name}
               onChange={handleInputChange}
               className={inputClasses}
-              placeholder="Your Name"
+              placeholder="Full Name"
             />
           </div>
           <div>
-            <InputLabel>Email</InputLabel>
+            <InputLabel>Email Address</InputLabel>
             <input
               required
               type="email"
@@ -88,12 +82,12 @@ const Rsvp: React.FC = () => {
               value={form.email}
               onChange={handleInputChange}
               className={inputClasses}
-              placeholder="Your Email"
+              placeholder="email@example.com"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
              <InputLabel>Attendance</InputLabel>
              <select
@@ -108,7 +102,7 @@ const Rsvp: React.FC = () => {
              </select>
           </div>
           <div>
-            <InputLabel>Guests</InputLabel>
+            <InputLabel>Number of Guests</InputLabel>
             <input
               type="number"
               name="guests"
@@ -122,29 +116,31 @@ const Rsvp: React.FC = () => {
         </div>
 
         <div>
-          <InputLabel>Your Wishes</InputLabel>
-          <div className="relative mt-2">
+          <InputLabel>Message for the Couple</InputLabel>
+          <div className="mt-2 bg-porcelain p-4 border border-gray-100">
             <textarea
               name="message"
               value={form.message}
               onChange={handleInputChange}
-              rows={3}
-              className="w-full bg-wedding-bg/50 border border-gray-100 p-6 focus:border-wedding-gold outline-none font-serif text-lg resize-none text-center md:text-left"
-              placeholder="Leave a message for the couple..."
+              rows={4}
+              className="w-full bg-transparent outline-none font-serif text-charcoal resize-none"
+              placeholder="Write a wish..."
             />
-            <div className="flex justify-end mt-2">
+            <div className="flex justify-end mt-2 pt-2 border-t border-gray-200">
               <button
                 type="button"
                 onClick={handleAiRefine}
                 disabled={isGenerating || !form.message}
-                className="text-[10px] uppercase tracking-widest text-wedding-gold hover:text-wedding-charcoal transition-colors flex items-center gap-2"
+                className="text-xs font-bold uppercase tracking-widest text-gold hover:text-rouge transition-colors flex items-center gap-2"
               >
                 {isGenerating ? (
                   <span>Polishing...</span>
                 ) : (
                   <>
-                    <span className="w-4 h-[1px] bg-current"></span>
-                    <span>Refine with AI</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                    </svg>
+                    <span>Polish with AI</span>
                   </>
                 )}
               </button>
@@ -152,14 +148,12 @@ const Rsvp: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center pt-8">
+        <div className="text-center pt-6">
           <button
             type="submit"
-            className="group relative inline-block px-12 py-4 border border-wedding-charcoal overflow-hidden transition-all duration-300 hover:bg-wedding-charcoal"
+            className="bg-rouge text-white px-10 py-4 font-sans text-xs uppercase tracking-[0.2em] hover:bg-charcoal transition-colors duration-300 shadow-lg"
           >
-            <span className="relative z-10 font-sans text-xs uppercase tracking-[0.2em] text-wedding-charcoal group-hover:text-white transition-colors duration-300">
-              Confirm Attendance
-            </span>
+            Confirm RSVP
           </button>
         </div>
       </form>
